@@ -15,40 +15,32 @@ font-family:Arial;
 background:#f2f4f8;
 }
 
-
 .box{
-width:350px;
-margin:70px auto;
+width:90%;
+max-width:500px;
+margin:50px auto;
 background:white;
 padding:25px;
 border-radius:10px;
 box-shadow:0 0 10px #ccc;
 }
 
-
 h2{
 text-align:center;
 }
 
-
 input,button{
-
 width:100%;
 padding:12px;
 margin-top:10px;
-
 }
 
-
 button{
-
 background:#0066ff;
 color:white;
 border:0;
 cursor:pointer;
-
 }
-
 
 .menu div{
 
@@ -58,22 +50,37 @@ padding:15px;
 margin:10px 0;
 border-radius:8px;
 text-align:center;
+cursor:pointer;
 
 }
 
-
-#dashboard{
+#dashboard,
+#pelanggan{
 
 display:none;
 
 }
 
-
 .logout{
-
 background:red;
+}
+
+
+table{
+
+width:100%;
+margin-top:20px;
+border-collapse:collapse;
 
 }
+
+td,th{
+
+border:1px solid #ccc;
+padding:8px;
+
+}
+
 
 </style>
 
@@ -85,33 +92,25 @@ background:red;
 
 <div class="box" id="login">
 
-
-<h2>
-🚚 LOGIN ADMIN
-</h2>
-
+<h2>🚚 LOGIN ADMIN</h2>
 
 <input id="user" placeholder="Username">
 
-
 <input id="pass" type="password" placeholder="Password">
-
 
 <button onclick="login()">
 LOGIN
 </button>
 
-
 <p id="pesan"></p>
-
 
 </div>
 
 
 
 
-<div class="box" id="dashboard">
 
+<div class="box" id="dashboard">
 
 <h2>
 🚚 NGETRUCK EKSPEDISI
@@ -126,32 +125,89 @@ Admin:
 
 <div class="menu">
 
-<div>👥 Pelanggan</div>
+<div onclick="pelanggan()">
+👥 Data Pelanggan
+</div>
 
-<div>🚚 Armada Truk</div>
+<div>
+🚚 Armada Truk
+</div>
 
-<div>👨‍✈️ Supir</div>
+<div>
+👨‍✈️ Supir
+</div>
 
-<div>📦 Pengiriman</div>
+<div>
+📦 Pengiriman
+</div>
 
-<div>📍 Tracking Resi</div>
+<div>
+📍 Tracking Resi
+</div>
 
-<div>📊 Laporan</div>
 
 </div>
 
 
-<br>
-
-
 <button class="logout" onclick="logout()">
-
 LOGOUT
-
 </button>
 
 
 </div>
+
+
+
+
+
+
+<div class="box" id="pelanggan">
+
+
+<h2>
+👥 DATA PELANGGAN
+</h2>
+
+
+<input id="namaP" placeholder="Nama Pelanggan">
+
+<input id="hp" placeholder="No HP">
+
+<input id="alamat" placeholder="Alamat">
+
+
+<button onclick="simpan()">
+Simpan
+</button>
+
+
+
+<table>
+
+<tr>
+<th>Nama</th>
+<th>HP</th>
+<th>Alamat</th>
+<th>Aksi</th>
+</tr>
+
+
+<tbody id="list">
+
+</tbody>
+
+</table>
+
+
+<br>
+
+<button onclick="kembali()">
+Kembali
+</button>
+
+
+</div>
+
 
 
 
@@ -162,41 +218,165 @@ LOGOUT
 function login(){
 
 
-let u =
-document.getElementById("user").value;
+let u=user.value;
 
-
-let p =
-document.getElementById("pass").value;
-
+let p=pass.value;
 
 
 if(u=="admin" && p=="123456"){
 
 
-document.getElementById("login")
-.style.display="none";
+login.style.display="none";
+
+dashboard.style.display="block";
+
+nama.innerHTML=u;
 
 
-document.getElementById("dashboard")
+}else{
+
+
+pesan.innerHTML="Login salah";
+
+
+}
+
+
+}
+
+
+
+
+
+function pelanggan(){
+
+
+dashboard.style.display="none";
+
+document.getElementById("pelanggan")
 .style.display="block";
 
 
-document.getElementById("nama")
-.innerHTML=u;
+tampil();
 
 
 }
 
-else{
 
 
-document.getElementById("pesan")
-.innerHTML="Login salah";
+
+
+function simpan(){
+
+
+let data=
+JSON.parse(localStorage.getItem("pelanggan"))||[];
+
+
+data.push({
+
+nama:namaP.value,
+
+hp:hp.value,
+
+alamat:alamat.value
+
+});
+
+
+localStorage.setItem(
+"pelanggan",
+JSON.stringify(data)
+);
+
+
+namaP.value="";
+hp.value="";
+alamat.value="";
+
+
+tampil();
+
+}
+
+
+
+
+
+function tampil(){
+
+
+let data=
+JSON.parse(localStorage.getItem("pelanggan"))||[];
+
+
+list.innerHTML="";
+
+
+data.forEach((x,i)=>{
+
+
+list.innerHTML +=`
+
+<tr>
+
+<td>${x.nama}</td>
+
+<td>${x.hp}</td>
+
+<td>${x.alamat}</td>
+
+<td>
+
+<button onclick="hapus(${i})">
+X
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
 
 
 }
 
+
+
+
+
+function hapus(i){
+
+
+let data=
+JSON.parse(localStorage.getItem("pelanggan"));
+
+
+data.splice(i,1);
+
+
+localStorage.setItem(
+"pelanggan",
+JSON.stringify(data)
+);
+
+
+tampil();
+
+
+}
+
+
+
+
+
+function kembali(){
+
+pelanggan.style.display="none";
+
+dashboard.style.display="block";
 
 }
 
