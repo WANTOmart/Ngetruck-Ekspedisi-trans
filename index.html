@@ -43,7 +43,6 @@ cursor:pointer;
 }
 
 .menu div{
-
 background:#0066ff;
 color:white;
 padding:15px;
@@ -51,36 +50,27 @@ margin:10px 0;
 border-radius:8px;
 text-align:center;
 cursor:pointer;
-
 }
 
 #dashboard,
-#pelanggan{
-
+#halamanPelanggan{
 display:none;
-
 }
 
 .logout{
 background:red;
 }
 
-
 table{
-
 width:100%;
-margin-top:20px;
 border-collapse:collapse;
-
+margin-top:20px;
 }
 
 td,th{
-
 border:1px solid #ccc;
 padding:8px;
-
 }
-
 
 </style>
 
@@ -90,17 +80,23 @@ padding:8px;
 <body>
 
 
-<div class="box" id="login">
+<!-- LOGIN -->
+
+<div class="box" id="halamanLogin">
 
 <h2>🚚 LOGIN ADMIN</h2>
 
-<input id="user" placeholder="Username">
 
-<input id="pass" type="password" placeholder="Password">
+<input id="username" placeholder="Username">
 
-<button onclick="login()">
+
+<input id="password" type="password" placeholder="Password">
+
+
+<button onclick="prosesLogin()">
 LOGIN
 </button>
+
 
 <p id="pesan"></p>
 
@@ -110,7 +106,11 @@ LOGIN
 
 
 
+<!-- DASHBOARD -->
+
+
 <div class="box" id="dashboard">
+
 
 <h2>
 🚚 NGETRUCK EKSPEDISI
@@ -118,31 +118,42 @@ LOGIN
 
 
 <p>
-Admin:
-<b id="nama"></b>
+Admin :
+<b id="namaAdmin"></b>
 </p>
+
 
 
 <div class="menu">
 
-<div onclick="pelanggan()">
+
+<div onclick="bukaPelanggan()">
 👥 Data Pelanggan
 </div>
+
 
 <div>
 🚚 Armada Truk
 </div>
 
+
 <div>
 👨‍✈️ Supir
 </div>
+
 
 <div>
 📦 Pengiriman
 </div>
 
+
 <div>
 📍 Tracking Resi
+</div>
+
+
+<div>
+📊 Laporan
 </div>
 
 
@@ -150,7 +161,9 @@ Admin:
 
 
 <button class="logout" onclick="logout()">
-LOGOUT
+
+Logout
+
 </button>
 
 
@@ -161,7 +174,10 @@ LOGOUT
 
 
 
-<div class="box" id="pelanggan">
+<!-- PELANGGAN -->
+
+
+<div class="box" id="halamanPelanggan">
 
 
 <h2>
@@ -169,44 +185,57 @@ LOGOUT
 </h2>
 
 
-<input id="namaP" placeholder="Nama Pelanggan">
+<input id="namaPelanggan" placeholder="Nama Pelanggan">
 
-<input id="hp" placeholder="No HP">
+
+<input id="nomorHP" placeholder="Nomor HP">
+
 
 <input id="alamat" placeholder="Alamat">
 
 
-<button onclick="simpan()">
+<button onclick="simpanPelanggan()">
+
 Simpan
+
 </button>
 
 
 
 <table>
 
+
 <tr>
+
 <th>Nama</th>
 <th>HP</th>
 <th>Alamat</th>
 <th>Aksi</th>
+
 </tr>
 
 
-<tbody id="list">
+<tbody id="tabelPelanggan">
 
 </tbody>
+
 
 </table>
 
 
+
 <br>
 
-<button onclick="kembali()">
+
+<button onclick="kembaliDashboard()">
+
 Kembali
+
 </button>
 
 
 </div>
+
 
 
 
@@ -215,49 +244,43 @@ Kembali
 <script>
 
 
-function login(){
+function prosesLogin(){
 
 
-let u=user.value;
-
-let p=pass.value;
-
-
-if(u=="admin" && p=="123456"){
+let user =
+document.getElementById("username").value;
 
 
-login.style.display="none";
-
-dashboard.style.display="block";
-
-nama.innerHTML=u;
-
-
-}else{
-
-
-pesan.innerHTML="Login salah";
-
-
-}
-
-
-}
+let pass =
+document.getElementById("password").value;
 
 
 
+if(user=="admin" && pass=="123456"){
 
 
-function pelanggan(){
+document.getElementById("halamanLogin")
+.style.display="none";
 
 
-dashboard.style.display="none";
-
-document.getElementById("pelanggan")
+document.getElementById("dashboard")
 .style.display="block";
 
 
-tampil();
+document.getElementById("namaAdmin")
+.innerHTML=user;
+
+
+}
+
+else{
+
+
+document.getElementById("pesan")
+.innerHTML="Login salah";
+
+
+}
 
 
 }
@@ -266,77 +289,113 @@ tampil();
 
 
 
-function simpan(){
+function bukaPelanggan(){
 
 
-let data=
-JSON.parse(localStorage.getItem("pelanggan"))||[];
+document.getElementById("dashboard")
+.style.display="none";
+
+
+document.getElementById("halamanPelanggan")
+.style.display="block";
+
+
+tampilPelanggan();
+
+
+}
+
+
+
+
+
+function simpanPelanggan(){
+
+
+let data =
+JSON.parse(localStorage.getItem("pelanggan")) || [];
+
 
 
 data.push({
 
-nama:namaP.value,
+nama:
+document.getElementById("namaPelanggan").value,
 
-hp:hp.value,
+hp:
+document.getElementById("nomorHP").value,
 
-alamat:alamat.value
+alamat:
+document.getElementById("alamat").value
 
 });
 
 
+
 localStorage.setItem(
+
 "pelanggan",
+
 JSON.stringify(data)
+
 );
 
 
-namaP.value="";
-hp.value="";
-alamat.value="";
 
+tampilPelanggan();
 
-tampil();
 
 }
 
 
 
+function tampilPelanggan(){
 
 
-function tampil(){
+let data =
+JSON.parse(localStorage.getItem("pelanggan")) || [];
 
 
-let data=
-JSON.parse(localStorage.getItem("pelanggan"))||[];
+
+let tabel =
+document.getElementById("tabelPelanggan");
 
 
-list.innerHTML="";
+tabel.innerHTML="";
 
 
-data.forEach((x,i)=>{
+
+data.forEach(function(item,index){
 
 
-list.innerHTML +=`
+tabel.innerHTML += `
+
 
 <tr>
 
-<td>${x.nama}</td>
+<td>${item.nama}</td>
 
-<td>${x.hp}</td>
+<td>${item.hp}</td>
 
-<td>${x.alamat}</td>
+<td>${item.alamat}</td>
+
 
 <td>
 
-<button onclick="hapus(${i})">
+<button onclick="hapusPelanggan(${index})">
+
 X
+
 </button>
 
 </td>
 
+
 </tr>
 
+
 `;
+
 
 });
 
@@ -346,24 +405,28 @@ X
 
 
 
+function hapusPelanggan(index){
 
-function hapus(i){
 
-
-let data=
+let data =
 JSON.parse(localStorage.getItem("pelanggan"));
 
 
-data.splice(i,1);
+data.splice(index,1);
+
 
 
 localStorage.setItem(
+
 "pelanggan",
+
 JSON.stringify(data)
+
 );
 
 
-tampil();
+
+tampilPelanggan();
 
 
 }
@@ -372,13 +435,20 @@ tampil();
 
 
 
-function kembali(){
+function kembaliDashboard(){
 
-pelanggan.style.display="none";
 
-dashboard.style.display="block";
+document.getElementById("halamanPelanggan")
+.style.display="none";
+
+
+document.getElementById("dashboard")
+.style.display="block";
+
 
 }
+
+
 
 
 
