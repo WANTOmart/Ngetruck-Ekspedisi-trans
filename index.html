@@ -52,24 +52,8 @@ text-align:center;
 cursor:pointer;
 }
 
-#dashboard,
-#halamanPelanggan{
+#dashboard{
 display:none;
-}
-
-.logout{
-background:red;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-margin-top:20px;
-}
-
-td,th{
-border:1px solid #ccc;
-padding:8px;
 }
 
 </style>
@@ -80,11 +64,12 @@ padding:8px;
 <body>
 
 
-<!-- LOGIN -->
+<div class="box" id="loginPage">
 
-<div class="box" id="halamanLogin">
 
-<h2>🚚 LOGIN ADMIN</h2>
+<h2>
+🚚 LOGIN ADMIN
+</h2>
 
 
 <input id="username" placeholder="Username">
@@ -93,20 +78,18 @@ padding:8px;
 <input id="password" type="password" placeholder="Password">
 
 
-<button onclick="prosesLogin()">
+<button onclick="loginAdmin()">
 LOGIN
 </button>
 
 
 <p id="pesan"></p>
 
+
 </div>
 
 
 
-
-
-<!-- DASHBOARD -->
 
 
 <div class="box" id="dashboard">
@@ -118,16 +101,15 @@ LOGIN
 
 
 <p>
-Admin :
-<b id="namaAdmin"></b>
+Admin:
+<b id="nama"></b>
 </p>
-
 
 
 <div class="menu">
 
 
-<div onclick="bukaPelanggan()">
+<div>
 👥 Data Pelanggan
 </div>
 
@@ -160,82 +142,15 @@ Admin :
 </div>
 
 
-<button class="logout" onclick="logout()">
-
-Logout
-
-</button>
-
-
-</div>
-
-
-
-
-
-
-<!-- PELANGGAN -->
-
-
-<div class="box" id="halamanPelanggan">
-
-
-<h2>
-👥 DATA PELANGGAN
-</h2>
-
-
-<input id="namaPelanggan" placeholder="Nama Pelanggan">
-
-
-<input id="nomorHP" placeholder="Nomor HP">
-
-
-<input id="alamat" placeholder="Alamat">
-
-
-<button onclick="simpanPelanggan()">
-
-Simpan
-
-</button>
-
-
-
-<table>
-
-
-<tr>
-
-<th>Nama</th>
-<th>HP</th>
-<th>Alamat</th>
-<th>Aksi</th>
-
-</tr>
-
-
-<tbody id="tabelPelanggan">
-
-</tbody>
-
-
-</table>
-
-
-
 <br>
 
 
-<button onclick="kembaliDashboard()">
-
-Kembali
-
+<button onclick="logout()">
+LOGOUT
 </button>
 
 
 </div>
-
 
 
 
@@ -244,31 +159,28 @@ Kembali
 <script>
 
 
-function prosesLogin(){
+function loginAdmin(){
 
 
-let user =
+let username =
 document.getElementById("username").value;
 
 
-let pass =
+let password =
 document.getElementById("password").value;
 
 
 
-if(user=="admin" && pass=="123456"){
+if(username=="admin" && password=="123456"){
 
 
-document.getElementById("halamanLogin")
-.style.display="none";
+document.getElementById("loginPage").style.display="none";
 
 
-document.getElementById("dashboard")
-.style.display="block";
+document.getElementById("dashboard").style.display="block";
 
 
-document.getElementById("namaAdmin")
-.innerHTML=user;
+document.getElementById("nama").innerHTML=username;
 
 
 }
@@ -276,178 +188,14 @@ document.getElementById("namaAdmin")
 else{
 
 
-document.getElementById("pesan")
-.innerHTML="Login salah";
+document.getElementById("pesan").innerHTML=
+"Login salah";
 
 
 }
 
 
 }
-
-
-
-
-
-function bukaPelanggan(){
-
-
-document.getElementById("dashboard")
-.style.display="none";
-
-
-document.getElementById("halamanPelanggan")
-.style.display="block";
-
-
-tampilPelanggan();
-
-
-}
-
-
-
-
-
-function simpanPelanggan(){
-
-
-let data =
-JSON.parse(localStorage.getItem("pelanggan")) || [];
-
-
-
-data.push({
-
-nama:
-document.getElementById("namaPelanggan").value,
-
-hp:
-document.getElementById("nomorHP").value,
-
-alamat:
-document.getElementById("alamat").value
-
-});
-
-
-
-localStorage.setItem(
-
-"pelanggan",
-
-JSON.stringify(data)
-
-);
-
-
-
-tampilPelanggan();
-
-
-}
-
-
-
-function tampilPelanggan(){
-
-
-let data =
-JSON.parse(localStorage.getItem("pelanggan")) || [];
-
-
-
-let tabel =
-document.getElementById("tabelPelanggan");
-
-
-tabel.innerHTML="";
-
-
-
-data.forEach(function(item,index){
-
-
-tabel.innerHTML += `
-
-
-<tr>
-
-<td>${item.nama}</td>
-
-<td>${item.hp}</td>
-
-<td>${item.alamat}</td>
-
-
-<td>
-
-<button onclick="hapusPelanggan(${index})">
-
-X
-
-</button>
-
-</td>
-
-
-</tr>
-
-
-`;
-
-
-});
-
-
-}
-
-
-
-
-function hapusPelanggan(index){
-
-
-let data =
-JSON.parse(localStorage.getItem("pelanggan"));
-
-
-data.splice(index,1);
-
-
-
-localStorage.setItem(
-
-"pelanggan",
-
-JSON.stringify(data)
-
-);
-
-
-
-tampilPelanggan();
-
-
-}
-
-
-
-
-
-function kembaliDashboard(){
-
-
-document.getElementById("halamanPelanggan")
-.style.display="none";
-
-
-document.getElementById("dashboard")
-.style.display="block";
-
-
-}
-
 
 
 
