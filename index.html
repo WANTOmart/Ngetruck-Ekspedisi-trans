@@ -5,15 +5,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ekspedisi Truk</title>
+<title>Ngetruck Ekspedisi</title>
 
 <style>
 
 body{
 margin:0;
 font-family:Arial;
-background:#f1f4f9;
+background:#f2f4f8;
 }
+
 
 .box{
 width:350px;
@@ -24,22 +25,30 @@ border-radius:10px;
 box-shadow:0 0 10px #ccc;
 }
 
+
 h2{
 text-align:center;
 }
 
+
 input,button{
+
 width:100%;
 padding:12px;
 margin-top:10px;
+
 }
 
+
 button{
+
 background:#0066ff;
 color:white;
 border:0;
 cursor:pointer;
+
 }
+
 
 .menu div{
 
@@ -52,12 +61,18 @@ text-align:center;
 
 }
 
+
 #dashboard{
+
 display:none;
+
 }
 
+
 .logout{
+
 background:red;
+
 }
 
 </style>
@@ -71,7 +86,9 @@ background:red;
 <div class="box" id="login">
 
 
-<h2>🚚 LOGIN ADMIN</h2>
+<h2>
+🚚 LOGIN ADMIN
+</h2>
 
 
 <input id="user" placeholder="Username">
@@ -97,7 +114,7 @@ LOGIN
 
 
 <h2>
-🚚 EKSPEDISI TRUK
+🚚 NGETRUCK EKSPEDISI
 </h2>
 
 
@@ -111,7 +128,7 @@ Admin:
 
 <div>👥 Pelanggan</div>
 
-<div>🚚 Armada</div>
+<div>🚚 Armada Truk</div>
 
 <div>👨‍✈️ Supir</div>
 
@@ -124,12 +141,18 @@ Admin:
 </div>
 
 
+<br>
+
+
 <button class="logout" onclick="logout()">
-Logout
+
+LOGOUT
+
 </button>
 
 
 </div>
+
 
 
 
@@ -138,11 +161,14 @@ Logout
 
 function login(){
 
+
 let u =
 document.getElementById("user").value;
 
+
 let p =
 document.getElementById("pass").value;
+
 
 
 if(u=="admin" && p=="123456"){
@@ -164,10 +190,13 @@ document.getElementById("nama")
 
 else{
 
+
 document.getElementById("pesan")
 .innerHTML="Login salah";
 
+
 }
+
 
 }
 
