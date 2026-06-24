@@ -12,12 +12,17 @@ background:#f2f4f8;
 }
 
 .box{
-width:350px;
-margin:80px auto;
+width:90%;
+max-width:600px;
+margin:40px auto;
 background:white;
 padding:25px;
 border-radius:10px;
 box-shadow:0 0 10px #ccc;
+}
+
+h2{
+text-align:center;
 }
 
 input,button{
@@ -30,19 +35,56 @@ button{
 background:#0066ff;
 color:white;
 border:0;
+cursor:pointer;
 }
 
-#dashboard{
+
+.menu div{
+
+background:#0066ff;
+color:white;
+padding:15px;
+margin:10px 0;
+border-radius:8px;
+text-align:center;
+cursor:pointer;
+
+}
+
+
+#dashboard,
+#pelanggan{
+
 display:none;
+
+}
+
+
+table{
+
+width:100%;
+margin-top:20px;
+border-collapse:collapse;
+
+}
+
+td,th{
+
+border:1px solid #ccc;
+padding:8px;
+
 }
 
 </style>
+
 
 </head>
 
 
 <body>
 
+
+<!-- LOGIN -->
 
 <div class="box" id="login">
 
@@ -59,7 +101,9 @@ display:none;
 
 
 <button onclick="cekLogin()">
+
 LOGIN
+
 </button>
 
 
@@ -72,6 +116,9 @@ LOGIN
 
 
 
+<!-- DASHBOARD -->
+
+
 <div class="box" id="dashboard">
 
 
@@ -82,34 +129,123 @@ LOGIN
 
 <p>
 Selamat datang Admin:
-<b id="admin"></b>
+<b id="nama"></b>
 </p>
 
 
-<h3>
-Menu
-</h3>
+<div class="menu">
 
 
-<p>👥 Pelanggan</p>
-
-<p>🚚 Armada Truk</p>
-
-<p>👨‍✈️ Supir</p>
-
-<p>📦 Pengiriman</p>
-
-<p>📍 Tracking Resi</p>
-
-<p>📊 Laporan</p>
+<div onclick="bukaPelanggan()">
+👥 Pelanggan
+</div>
 
 
-<button onclick="keluar()">
+<div>
+🚚 Armada Truk
+</div>
+
+
+<div>
+👨‍✈️ Supir
+</div>
+
+
+<div>
+📦 Pengiriman
+</div>
+
+
+<div>
+📍 Tracking Resi
+</div>
+
+
+<div>
+📊 Laporan
+</div>
+
+
+</div>
+
+
+<br>
+
+
+<button onclick="logout()">
+
 LOGOUT
+
 </button>
 
 
 </div>
+
+
+
+
+
+
+
+<!-- PELANGGAN -->
+
+
+<div class="box" id="pelanggan">
+
+
+<h2>
+👥 DATA PELANGGAN
+</h2>
+
+
+<input id="namaP" placeholder="Nama Pelanggan">
+
+
+<input id="hp" placeholder="Nomor HP">
+
+
+<input id="alamat" placeholder="Alamat">
+
+
+<button onclick="simpan()">
+
+SIMPAN
+
+</button>
+
+
+
+<table>
+
+
+<tr>
+
+<th>Nama</th>
+<th>HP</th>
+<th>Alamat</th>
+
+</tr>
+
+
+<tbody id="tabel"></tbody>
+
+
+</table>
+
+
+<br>
+
+
+<button onclick="kembali()">
+
+Kembali
+
+</button>
+
+
+</div>
+
+
 
 
 
@@ -121,16 +257,16 @@ LOGOUT
 function cekLogin(){
 
 
-let username =
+let u =
 document.getElementById("user").value;
 
 
-let password =
+let p =
 document.getElementById("pass").value;
 
 
 
-if(username === "admin" && password === "123456"){
+if(u=="admin" && p=="123456"){
 
 
 document.getElementById("login").style.display="none";
@@ -139,7 +275,7 @@ document.getElementById("login").style.display="none";
 document.getElementById("dashboard").style.display="block";
 
 
-document.getElementById("admin").innerHTML=username;
+document.getElementById("nama").innerHTML=u;
 
 
 }
@@ -147,8 +283,7 @@ document.getElementById("admin").innerHTML=username;
 else{
 
 
-document.getElementById("pesan").innerHTML=
-"Username atau Password salah";
+document.getElementById("pesan").innerHTML="Login salah";
 
 
 }
@@ -158,7 +293,124 @@ document.getElementById("pesan").innerHTML=
 
 
 
-function keluar(){
+
+
+
+function bukaPelanggan(){
+
+
+document.getElementById("dashboard").style.display="none";
+
+
+document.getElementById("pelanggan").style.display="block";
+
+
+tampil();
+
+
+}
+
+
+
+
+
+function simpan(){
+
+
+let data =
+
+JSON.parse(localStorage.getItem("pelanggan")) || [];
+
+
+
+data.push({
+
+nama:
+document.getElementById("namaP").value,
+
+hp:
+document.getElementById("hp").value,
+
+alamat:
+document.getElementById("alamat").value
+
+});
+
+
+
+localStorage.setItem(
+
+"pelanggan",
+
+JSON.stringify(data)
+
+);
+
+
+
+tampil();
+
+
+}
+
+
+
+function tampil(){
+
+
+let data =
+
+JSON.parse(localStorage.getItem("pelanggan")) || [];
+
+
+
+document.getElementById("tabel").innerHTML="";
+
+
+
+data.forEach(function(x){
+
+
+document.getElementById("tabel").innerHTML += `
+
+
+<tr>
+
+<td>${x.nama}</td>
+
+<td>${x.hp}</td>
+
+<td>${x.alamat}</td>
+
+</tr>
+
+
+`;
+
+
+});
+
+
+}
+
+
+
+
+
+function kembali(){
+
+
+document.getElementById("pelanggan").style.display="none";
+
+
+document.getElementById("dashboard").style.display="block";
+
+
+}
+
+
+
+function logout(){
 
 location.reload();
 
