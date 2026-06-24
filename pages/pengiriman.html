@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Pengiriman</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="container">
+
+<h2>Order Pengiriman</h2>
+
+<input id="pengirim" placeholder="Pengirim">
+<input id="tujuan" placeholder="Tujuan">
+<input id="barang" placeholder="Barang">
+
+<button onclick="simpanPengiriman()">
+Simpan
+</button>
+
+<table border="1" width="100%">
+<thead>
+<tr>
+<th>Resi</th>
+<th>Pengirim</th>
+<th>Tujuan</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody id="dataPengiriman"></tbody>
+
+</table>
+
+</div>
+
+<script src="../js/pengiriman.js"></script>
+
+</body>
+</html>
