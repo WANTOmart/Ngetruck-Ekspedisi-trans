@@ -1,23 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<title>Ekspedisi Truk</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+margin:0;
+background:#f1f3f6;
+}
+
+
+.login,
+.dashboard,
+.content{
+
+width:90%;
+max-width:1000px;
+margin:40px auto;
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 0 10px #ccc;
+
+}
+
+
+input{
+
+width:100%;
+padding:10px;
+margin:5px 0;
+
+}
+
+
+button{
+
+padding:10px;
+background:#0066ff;
+color:white;
+border:0;
+border-radius:5px;
+cursor:pointer;
+
+}
+
+
+.menu{
+
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+
+}
+
+
+.menu div{
+
+background:#0066ff;
+color:white;
+padding:20px;
+text-align:center;
+border-radius:8px;
+cursor:pointer;
+
+}
+
+
+.logout{
+
+background:red;
+width:100%;
+
+}
+
+
+table{
+
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+
+}
+
+
+th,td{
+
+border:1px solid #ddd;
+padding:8px;
+
+}
+
+
+#dashboard,
+#content{
+
+display:none;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+
+<div class="login" id="login">
+
+
+<h2>🚚 LOGIN ADMIN</h2>
+
+
+<input id="user" placeholder="Username">
+
+
+<input id="pass" type="password" placeholder="Password">
+
+
+<button onclick="prosesLogin()">
+
+LOGIN
+
+</button>
+
+
+<p id="pesan"></p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="dashboard" id="dashboard">
+
+
+<h2>🚚 EKSPEDISI TRUK</h2>
+
+
+<p>
+Admin :
+<b id="nama"></b>
+</p>
+
+
+<div class="menu">
+
+
+<div onclick="buka('pelanggan')">
+👥 Pelanggan
+</div>
+
+
+<div onclick="buka('armada')">
+🚚 Armada Truk
+</div>
+
+
+<div onclick="buka('supir')">
+👨‍✈️ Supir
+</div>
+
+
+<div onclick="buka('pengiriman')">
+📦 Pengiriman
+</div>
+
+
+<div onclick="buka('tracking')">
+📍 Tracking Resi
+</div>
+
+
+<div onclick="buka('laporan')">
+📊 Laporan
+</div>
+
+
+</div>
+
+
+<br>
+
+
+<button class="logout" onclick="logout()">
+
+Logout
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="content" id="content">
+
+
+<h2 id="judul"></h2>
+
+
+<div id="form"></div>
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>Data</th>
+
+<th>Aksi</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="tabel"></tbody>
+
+
+</table>
+
+
+<br>
+
+
+<button onclick="kembali()">
+
+⬅ Kembali
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+
 <script>
+
 
 let jenis="";
 
 
-function login(){
 
-let username = document.getElementById("user").value;
 
-let password = document.getElementById("pass").value;
+
+function prosesLogin(){
+
+
+let username=document.getElementById("user").value;
+
+
+let password=document.getElementById("pass").value;
+
 
 
 if(username=="admin" && password=="123456"){
 
 
+
 document.getElementById("login").style.display="none";
+
 
 document.getElementById("dashboard").style.display="block";
 
+
 document.getElementById("nama").innerHTML=username;
+
 
 
 }else{
@@ -28,7 +303,9 @@ document.getElementById("pesan").innerHTML="Login salah";
 
 }
 
+
 }
+
 
 
 
@@ -42,13 +319,17 @@ jenis=menu;
 
 document.getElementById("dashboard").style.display="none";
 
+
 document.getElementById("content").style.display="block";
 
 
 document.getElementById("judul").innerHTML=menu.toUpperCase();
 
 
+
 let h="";
+
+
 
 
 
@@ -63,11 +344,14 @@ h=`
 
 <input id="c" placeholder="Alamat">
 
-<button onclick="simpan()">Simpan</button>
+<button onclick="simpan()">
+Simpan
+</button>
 
 `;
 
 }
+
 
 
 
@@ -83,7 +367,9 @@ h=`
 
 <input id="c" placeholder="Status">
 
-<button onclick="simpan()">Simpan</button>
+<button onclick="simpan()">
+Simpan
+</button>
 
 `;
 
@@ -102,11 +388,14 @@ h=`
 
 <input id="b" placeholder="No HP">
 
-<button onclick="simpan()">Simpan</button>
+<button onclick="simpan()">
+Simpan
+</button>
 
 `;
 
 }
+
 
 
 
@@ -124,7 +413,9 @@ h=`
 <input id="c" placeholder="Status">
 
 
-<button onclick="simpan()">Simpan</button>
+<button onclick="simpan()">
+Simpan
+</button>
 
 `;
 
@@ -141,7 +432,10 @@ h=`
 
 <input id="a" placeholder="Masukkan Resi">
 
-<button onclick="tracking()">Cari</button>
+<button onclick="tracking()">
+Cari
+</button>
+
 
 <p id="hasil"></p>
 
@@ -152,25 +446,27 @@ h=`
 
 
 
+
 if(menu=="laporan"){
 
 
 let p=data("pelanggan");
 
-let t=data("armada");
+let a=data("armada");
 
 let s=data("supir");
 
 let k=data("pengiriman");
 
 
+
 h=`
 
-<h3>📊 Statistik</h3>
+<h3>📊 Laporan</h3>
 
 <p>Pelanggan : ${p.length}</p>
 
-<p>Armada : ${t.length}</p>
+<p>Armada : ${a.length}</p>
 
 <p>Supir : ${s.length}</p>
 
@@ -194,6 +490,7 @@ tampil();
 
 
 
+
 function simpan(){
 
 
@@ -203,18 +500,24 @@ let arr=data(jenis);
 let isi=document.getElementById("a").value;
 
 
+
 let b=document.getElementById("b");
 
 let c=document.getElementById("c");
 
 
+
 if(b){
+
 isi+=" | "+b.value;
+
 }
 
 
 if(c){
+
 isi+=" | "+c.value;
+
 }
 
 
@@ -240,7 +543,9 @@ alert("Data tersimpan");
 
 function data(n){
 
+
 return JSON.parse(localStorage.getItem(n)) || [];
+
 
 }
 
@@ -257,6 +562,7 @@ let tabel=document.getElementById("tabel");
 tabel.innerHTML="";
 
 
+
 data(jenis).forEach((x,i)=>{
 
 
@@ -265,6 +571,7 @@ tabel.innerHTML+=`
 <tr>
 
 <td>${x}</td>
+
 
 <td>
 
@@ -276,9 +583,11 @@ Hapus
 
 </td>
 
+
 </tr>
 
 `;
+
 
 });
 
@@ -312,13 +621,15 @@ tampil();
 
 
 
+
+
 function tracking(){
 
 
 let cari=document.getElementById("a").value;
 
 
-let hasil="Tidak ditemukan";
+let hasil="Resi tidak ditemukan";
 
 
 data("pengiriman").forEach(x=>{
@@ -362,10 +673,15 @@ document.getElementById("dashboard").style.display="block";
 
 
 
+
+
 function logout(){
 
 
 document.getElementById("dashboard").style.display="none";
+
+
+document.getElementById("content").style.display="none";
 
 
 document.getElementById("login").style.display="block";
@@ -374,4 +690,9 @@ document.getElementById("login").style.display="block";
 }
 
 
+
 </script>
+
+
+</body>
+</html>
