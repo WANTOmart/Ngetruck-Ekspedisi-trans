@@ -1,698 +1,363 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ekspedisi Truk</title>
 
-<meta charset="UTF-8">
-<title>Ekspedisi Truk</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-<style>
+    body {
+      margin: 0;
+      background: #f1f3f6;
+    }
 
-*{
-box-sizing:border-box;
-font-family:Arial;
-}
+    .login,
+    .dashboard,
+    .content {
+      width: 90%;
+      max-width: 1000px;
+      margin: 40px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
 
-body{
-margin:0;
-background:#f1f3f6;
-}
+    h2 {
+      text-align: center;
+    }
 
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 7px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
 
-.login,
-.dashboard,
-.content{
+    button {
+      padding: 12px;
+      background: #0066ff;
+      color: white;
+      border: 0;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
 
-width:90%;
-max-width:1000px;
-margin:40px auto;
-background:white;
-padding:25px;
-border-radius:10px;
-box-shadow:0 0 10px #ccc;
+    button:hover {
+      opacity: 0.85;
+    }
 
-}
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
 
+    .menu div {
+      background: #0066ff;
+      color: white;
+      padding: 22px;
+      text-align: center;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 17px;
+    }
 
-input{
+    .menu div:hover {
+      background: #004fc4;
+    }
 
-width:100%;
-padding:10px;
-margin:5px 0;
+    .logout {
+      background: #e53935;
+      width: 100%;
+    }
 
-}
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
 
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
 
-button{
+    th {
+      background: #0066ff;
+      color: white;
+    }
 
-padding:10px;
-background:#0066ff;
-color:white;
-border:0;
-border-radius:5px;
-cursor:pointer;
+    td button {
+      background: #e53935;
+      margin: 0;
+      padding: 8px 12px;
+    }
 
-}
+    #dashboard,
+    #content {
+      display: none;
+    }
 
-
-.menu{
-
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:10px;
-
-}
-
-
-.menu div{
-
-background:#0066ff;
-color:white;
-padding:20px;
-text-align:center;
-border-radius:8px;
-cursor:pointer;
-
-}
-
-
-.logout{
-
-background:red;
-width:100%;
-
-}
-
-
-table{
-
-width:100%;
-border-collapse:collapse;
-margin-top:20px;
-
-}
-
-
-th,td{
-
-border:1px solid #ddd;
-padding:8px;
-
-}
-
-
-#dashboard,
-#content{
-
-display:none;
-
-}
-
-</style>
-
+    @media (max-width: 600px) {
+      .menu {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
-
-
-<div class="login" id="login">
-
-
-<h2>🚚 LOGIN ADMIN</h2>
-
-
-<input id="user" placeholder="Username">
-
-
-<input id="pass" type="password" placeholder="Password">
-
-
-<button onclick="prosesLogin()">
-
-LOGIN
-
-</button>
-
-
-<p id="pesan"></p>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="dashboard" id="dashboard">
-
-
-<h2>🚚 EKSPEDISI TRUK</h2>
-
-
-<p>
-Admin :
-<b id="nama"></b>
-</p>
-
-
-<div class="menu">
-
-
-<div onclick="buka('pelanggan')">
-👥 Pelanggan
-</div>
-
-
-<div onclick="buka('armada')">
-🚚 Armada Truk
-</div>
-
-
-<div onclick="buka('supir')">
-👨‍✈️ Supir
-</div>
-
-
-<div onclick="buka('pengiriman')">
-📦 Pengiriman
-</div>
-
-
-<div onclick="buka('tracking')">
-📍 Tracking Resi
-</div>
-
-
-<div onclick="buka('laporan')">
-📊 Laporan
-</div>
-
-
-</div>
-
-
-<br>
-
-
-<button class="logout" onclick="logout()">
-
-Logout
-
-</button>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="content" id="content">
-
-
-<h2 id="judul"></h2>
-
-
-<div id="form"></div>
-
-
-<table>
-
-
-<thead>
-
-<tr>
-
-<th>Data</th>
-
-<th>Aksi</th>
-
-</tr>
-
-</thead>
-
-
-<tbody id="tabel"></tbody>
-
-
-</table>
-
-
-<br>
-
-
-<button onclick="kembali()">
-
-⬅ Kembali
-
-</button>
-
-
-</div>
-
-
-
-
-
-
-
-
-<script>
-
-
-let jenis="";
-
-
-
-
-
-function prosesLogin(){
-
-
-let username=document.getElementById("user").value;
-
-
-let password=document.getElementById("pass").value;
-
-
-
-if(username=="admin" && password=="123456"){
-
-
-
-document.getElementById("login").style.display="none";
-
-
-document.getElementById("dashboard").style.display="block";
-
-
-document.getElementById("nama").innerHTML=username;
-
-
-
-}else{
-
-
-document.getElementById("pesan").innerHTML="Login salah";
-
-
-}
-
-
-}
-
-
-
-
-
-
-function buka(menu){
-
-
-jenis=menu;
-
-
-document.getElementById("dashboard").style.display="none";
-
-
-document.getElementById("content").style.display="block";
-
-
-document.getElementById("judul").innerHTML=menu.toUpperCase();
-
-
-
-let h="";
-
-
-
-
-
-if(menu=="pelanggan"){
-
-
-h=`
-
-<input id="a" placeholder="Nama Pelanggan">
-
-<input id="b" placeholder="No HP">
-
-<input id="c" placeholder="Alamat">
-
-<button onclick="simpan()">
-Simpan
-</button>
-
-`;
-
-}
-
-
-
-
-
-if(menu=="armada"){
-
-
-h=`
-
-<input id="a" placeholder="Nomor Polisi">
-
-<input id="b" placeholder="Jenis Truk">
-
-<input id="c" placeholder="Status">
-
-<button onclick="simpan()">
-Simpan
-</button>
-
-`;
-
-}
-
-
-
-
-
-if(menu=="supir"){
-
-
-h=`
-
-<input id="a" placeholder="Nama Supir">
-
-<input id="b" placeholder="No HP">
-
-<button onclick="simpan()">
-Simpan
-</button>
-
-`;
-
-}
-
-
-
-
-
-
-if(menu=="pengiriman"){
-
-
-h=`
-
-<input id="a" placeholder="Nomor Resi">
-
-<input id="b" placeholder="Tujuan">
-
-<input id="c" placeholder="Status">
-
-
-<button onclick="simpan()">
-Simpan
-</button>
-
-`;
-
-}
-
-
-
-
-
-if(menu=="tracking"){
-
-
-h=`
-
-<input id="a" placeholder="Masukkan Resi">
-
-<button onclick="tracking()">
-Cari
-</button>
-
-
-<p id="hasil"></p>
-
-`;
-
-}
-
-
-
-
-
-if(menu=="laporan"){
-
-
-let p=data("pelanggan");
-
-let a=data("armada");
-
-let s=data("supir");
-
-let k=data("pengiriman");
-
-
-
-h=`
-
-<h3>📊 Laporan</h3>
-
-<p>Pelanggan : ${p.length}</p>
-
-<p>Armada : ${a.length}</p>
-
-<p>Supir : ${s.length}</p>
-
-<p>Pengiriman : ${k.length}</p>
-
-`;
-
-}
-
-
-
-document.getElementById("form").innerHTML=h;
-
-
-tampil();
-
-
-}
-
-
-
-
-
-
-function simpan(){
-
-
-let arr=data(jenis);
-
-
-let isi=document.getElementById("a").value;
-
-
-
-let b=document.getElementById("b");
-
-let c=document.getElementById("c");
-
-
-
-if(b){
-
-isi+=" | "+b.value;
-
-}
-
-
-if(c){
-
-isi+=" | "+c.value;
-
-}
-
-
-
-arr.push(isi);
-
-
-localStorage.setItem(jenis,JSON.stringify(arr));
-
-
-tampil();
-
-
-alert("Data tersimpan");
-
-
-}
-
-
-
-
-
-
-function data(n){
-
-
-return JSON.parse(localStorage.getItem(n)) || [];
-
-
-}
-
-
-
-
-
-function tampil(){
-
-
-let tabel=document.getElementById("tabel");
-
-
-tabel.innerHTML="";
-
-
-
-data(jenis).forEach((x,i)=>{
-
-
-tabel.innerHTML+=`
-
-<tr>
-
-<td>${x}</td>
-
-
-<td>
-
-<button onclick="hapus(${i})">
-
-Hapus
-
-</button>
-
-</td>
-
-
-</tr>
-
-`;
-
-
-});
-
-
-}
-
-
-
-
-
-
-
-function hapus(i){
-
-
-let arr=data(jenis);
-
-
-arr.splice(i,1);
-
-
-localStorage.setItem(jenis,JSON.stringify(arr));
-
-
-tampil();
-
-
-}
-
-
-
-
-
-
-
-function tracking(){
-
-
-let cari=document.getElementById("a").value;
-
-
-let hasil="Resi tidak ditemukan";
-
-
-data("pengiriman").forEach(x=>{
-
-
-if(x.includes(cari)){
-
-
-hasil="📦 "+x;
-
-
-}
-
-
-});
-
-
-document.getElementById("hasil").innerHTML=hasil;
-
-
-}
-
-
-
-
-
-
-
-function kembali(){
-
-
-document.getElementById("content").style.display="none";
-
-
-document.getElementById("dashboard").style.display="block";
-
-
-}
-
-
-
-
-
-
-
-function logout(){
-
-
-document.getElementById("dashboard").style.display="none";
-
-
-document.getElementById("content").style.display="none";
-
-
-document.getElementById("login").style.display="block";
-
-
-}
-
-
-
-</script>
-
+  <!-- LOGIN -->
+  <div class="login" id="login">
+    <h2>🚚 LOGIN ADMIN</h2>
+
+    <input id="user" placeholder="Username">
+    <input id="pass" type="password" placeholder="Password">
+
+    <button onclick="prosesLogin()">LOGIN</button>
+
+    <p id="pesan"></p>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="dashboard" id="dashboard">
+    <h2>🚚 EKSPEDISI TRUK</h2>
+
+    <p>
+      Selamat datang Admin:
+      <b id="nama"></b>
+    </p>
+
+    <div class="menu">
+      <div onclick="buka('pelanggan')">👥 Pelanggan</div>
+      <div onclick="buka('armada')">🚚 Armada Truk</div>
+      <div onclick="buka('supir')">👨‍✈️ Supir</div>
+      <div onclick="buka('pengiriman')">📦 Pengiriman</div>
+      <div onclick="buka('tracking')">📍 Tracking Resi</div>
+      <div onclick="buka('laporan')">📊 Laporan</div>
+    </div>
+
+    <br>
+
+    <button class="logout" onclick="logout()">Logout</button>
+  </div>
+
+  <!-- HALAMAN DATA -->
+  <div class="content" id="content">
+    <h2 id="judul"></h2>
+
+    <div id="form"></div>
+
+    <table id="tabelData">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody id="tabel"></tbody>
+    </table>
+
+    <br>
+
+    <button onclick="kembali()">⬅ Kembali ke Dashboard</button>
+  </div>
+
+  <script>
+    let jenis = "";
+
+    function prosesLogin() {
+      let username = document.getElementById("user").value;
+      let password = document.getElementById("pass").value;
+
+      if (username === "admin" && password === "123456") {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
+        document.getElementById("nama").innerHTML = username;
+        document.getElementById("pesan").innerHTML = "";
+      } else {
+        document.getElementById("pesan").innerHTML = "❌ Username atau password salah";
+      }
+    }
+
+    function buka(menu) {
+      jenis = menu;
+
+      document.getElementById("dashboard").style.display = "none";
+      document.getElementById("content").style.display = "block";
+      document.getElementById("judul").innerHTML = menu.toUpperCase();
+
+      let h = "";
+
+      if (menu === "pelanggan") {
+        h = `
+          <input id="a" placeholder="Nama Pelanggan">
+          <input id="b" placeholder="No HP">
+          <input id="c" placeholder="Alamat">
+          <button onclick="simpan()">Simpan Pelanggan</button>
+        `;
+      }
+
+      if (menu === "armada") {
+        h = `
+          <input id="a" placeholder="Nomor Polisi">
+          <input id="b" placeholder="Jenis Truk">
+          <input id="c" placeholder="Status Armada">
+          <button onclick="simpan()">Simpan Armada</button>
+        `;
+      }
+
+      if (menu === "supir") {
+        h = `
+          <input id="a" placeholder="Nama Supir">
+          <input id="b" placeholder="No HP">
+          <button onclick="simpan()">Simpan Supir</button>
+        `;
+      }
+
+      if (menu === "pengiriman") {
+        h = `
+          <input id="a" placeholder="Nomor Resi">
+          <input id="b" placeholder="Tujuan Pengiriman">
+          <input id="c" placeholder="Status Pengiriman">
+          <button onclick="simpan()">Simpan Pengiriman</button>
+        `;
+      }
+
+      if (menu === "tracking") {
+        h = `
+          <input id="a" placeholder="Masukkan Nomor Resi">
+          <button onclick="tracking()">Cari Resi</button>
+          <p id="hasil"></p>
+        `;
+      }
+
+      if (menu === "laporan") {
+        let pelanggan = data("pelanggan");
+        let armada = data("armada");
+        let supir = data("supir");
+        let pengiriman = data("pengiriman");
+
+        h = `
+          <h3>📊 LAPORAN DATA EKSPEDISI</h3>
+          <p>Total Pelanggan: <b>${pelanggan.length}</b></p>
+          <p>Total Armada: <b>${armada.length}</b></p>
+          <p>Total Supir: <b>${supir.length}</b></p>
+          <p>Total Pengiriman: <b>${pengiriman.length}</b></p>
+        `;
+      }
+
+      document.getElementById("form").innerHTML = h;
+
+      if (menu === "tracking" || menu === "laporan") {
+        document.getElementById("tabelData").style.display = "none";
+      } else {
+        document.getElementById("tabelData").style.display = "table";
+        tampil();
+      }
+    }
+
+    function simpan() {
+      let inputA = document.getElementById("a").value.trim();
+      let inputB = document.getElementById("b");
+      let inputC = document.getElementById("c");
+
+      if (inputA === "") {
+        alert("Data utama masih kosong");
+        return;
+      }
+
+      let isi = inputA;
+
+      if (inputB && inputB.value.trim() !== "") {
+        isi += " | " + inputB.value.trim();
+      }
+
+      if (inputC && inputC.value.trim() !== "") {
+        isi += " | " + inputC.value.trim();
+      }
+
+      let arr = data(jenis);
+      arr.push(isi);
+
+      localStorage.setItem(jenis, JSON.stringify(arr));
+
+      tampil();
+      alert("✅ Data berhasil disimpan");
+
+      document.getElementById("a").value = "";
+      if (inputB) inputB.value = "";
+      if (inputC) inputC.value = "";
+    }
+
+    function data(namaData) {
+      return JSON.parse(localStorage.getItem(namaData)) || [];
+    }
+
+    function tampil() {
+      let tabel = document.getElementById("tabel");
+      tabel.innerHTML = "";
+
+      data(jenis).forEach((x, i) => {
+        tabel.innerHTML += `
+          <tr>
+            <td>${x}</td>
+            <td>
+              <button onclick="hapus(${i})">Hapus</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function hapus(i) {
+      if (!confirm("Hapus data ini?")) return;
+
+      let arr = data(jenis);
+      arr.splice(i, 1);
+
+      localStorage.setItem(jenis, JSON.stringify(arr));
+      tampil();
+    }
+
+    function tracking() {
+      let cari = document.getElementById("a").value.trim();
+      let hasil = "❌ Resi tidak ditemukan";
+
+      data("pengiriman").forEach(x => {
+        if (x.toLowerCase().includes(cari.toLowerCase())) {
+          hasil = "📦 Data pengiriman ditemukan:<br><b>" + x + "</b>";
+        }
+      });
+
+      document.getElementById("hasil").innerHTML = hasil;
+    }
+
+    function kembali() {
+      document.getElementById("content").style.display = "none";
+      document.getElementById("dashboard").style.display = "block";
+    }
+
+    function logout() {
+      document.getElementById("dashboard").style.display = "none";
+      document.getElementById("content").style.display = "none";
+      document.getElementById("login").style.display = "block";
+
+      document.getElementById("user").value = "";
+      document.getElementById("pass").value = "";
+    }
+  </script>
 
 </body>
 </html>
