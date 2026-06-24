@@ -1,32 +1,23 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Ngetruck Ekspedisi</title>
 
 <style>
 
 body{
-margin:0;
 font-family:Arial;
 background:#f2f4f8;
 }
 
 .box{
-width:90%;
-max-width:500px;
-margin:50px auto;
+width:350px;
+margin:80px auto;
 background:white;
 padding:25px;
 border-radius:10px;
 box-shadow:0 0 10px #ccc;
-}
-
-h2{
-text-align:center;
 }
 
 input,button{
@@ -39,17 +30,6 @@ button{
 background:#0066ff;
 color:white;
 border:0;
-cursor:pointer;
-}
-
-.menu div{
-background:#0066ff;
-color:white;
-padding:15px;
-margin:10px 0;
-border-radius:8px;
-text-align:center;
-cursor:pointer;
 }
 
 #dashboard{
@@ -64,7 +44,7 @@ display:none;
 <body>
 
 
-<div class="box" id="loginPage">
+<div class="box" id="login">
 
 
 <h2>
@@ -72,13 +52,13 @@ display:none;
 </h2>
 
 
-<input id="username" placeholder="Username">
+<input id="user" placeholder="Username">
 
 
-<input id="password" type="password" placeholder="Password">
+<input id="pass" type="password" placeholder="Password">
 
 
-<button onclick="loginAdmin()">
+<button onclick="cekLogin()">
 LOGIN
 </button>
 
@@ -101,51 +81,30 @@ LOGIN
 
 
 <p>
-Admin:
-<b id="nama"></b>
+Selamat datang Admin:
+<b id="admin"></b>
 </p>
 
 
-<div class="menu">
+<h3>
+Menu
+</h3>
 
 
-<div>
-👥 Data Pelanggan
-</div>
+<p>👥 Pelanggan</p>
+
+<p>🚚 Armada Truk</p>
+
+<p>👨‍✈️ Supir</p>
+
+<p>📦 Pengiriman</p>
+
+<p>📍 Tracking Resi</p>
+
+<p>📊 Laporan</p>
 
 
-<div>
-🚚 Armada Truk
-</div>
-
-
-<div>
-👨‍✈️ Supir
-</div>
-
-
-<div>
-📦 Pengiriman
-</div>
-
-
-<div>
-📍 Tracking Resi
-</div>
-
-
-<div>
-📊 Laporan
-</div>
-
-
-</div>
-
-
-<br>
-
-
-<button onclick="logout()">
+<button onclick="keluar()">
 LOGOUT
 </button>
 
@@ -159,28 +118,28 @@ LOGOUT
 <script>
 
 
-function loginAdmin(){
+function cekLogin(){
 
 
 let username =
-document.getElementById("username").value;
+document.getElementById("user").value;
 
 
 let password =
-document.getElementById("password").value;
+document.getElementById("pass").value;
 
 
 
-if(username=="admin" && password=="123456"){
+if(username === "admin" && password === "123456"){
 
 
-document.getElementById("loginPage").style.display="none";
+document.getElementById("login").style.display="none";
 
 
 document.getElementById("dashboard").style.display="block";
 
 
-document.getElementById("nama").innerHTML=username;
+document.getElementById("admin").innerHTML=username;
 
 
 }
@@ -189,7 +148,7 @@ else{
 
 
 document.getElementById("pesan").innerHTML=
-"Login salah";
+"Username atau Password salah";
 
 
 }
@@ -199,8 +158,7 @@ document.getElementById("pesan").innerHTML=
 
 
 
-
-function logout(){
+function keluar(){
 
 location.reload();
 
