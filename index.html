@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Ekspedisi Truk</title>
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<title>Ekspedisi Truk</title>
 </head>
 <body>
-    <div class="container">
-        <h1>🚚 EKSPEDISI TRUK</h1>
 
-        <div class="menu">
-            <a href="dashboard.html">Dashboard</a>
-            <a href="pages/pelanggan.html">Pelanggan</a>
-            <a href="pages/armada.html">Armada</a>
-            <a href="pages/supir.html">Supir</a>
-            <a href="pages/pengiriman.html">Pengiriman</a>
-            <a href="pages/tracking.html">Tracking</a>
-            <a href="pages/laporan.html">Laporan</a>
-        </div>
-    </div>
+<script>
+
+if(localStorage.getItem("login") === "true"){
+    window.location.href =
+    "dashboard.html";
+}else{
+    window.location.href =
+    "login.html";
+}
+
+</script>
+
 </body>
 </html>
