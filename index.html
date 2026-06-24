@@ -10,71 +10,55 @@
 <style>
 
 body{
-    margin:0;
-    font-family:Arial;
-    background:#f2f4f8;
+margin:0;
+font-family:Arial;
+background:#f1f4f9;
 }
-
 
 .box{
-    width:350px;
-    margin:80px auto;
-    background:white;
-    padding:25px;
-    border-radius:10px;
-    box-shadow:0 0 10px #ccc;
+width:350px;
+margin:70px auto;
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 0 10px #ccc;
 }
-
 
 h2{
-    text-align:center;
+text-align:center;
 }
 
-
-input{
-    width:100%;
-    padding:12px;
-    margin:8px 0;
+input,button{
+width:100%;
+padding:12px;
+margin-top:10px;
 }
-
 
 button{
-
-    width:100%;
-    padding:12px;
-    background:#0066ff;
-    color:white;
-    border:0;
-    border-radius:5px;
-
+background:#0066ff;
+color:white;
+border:0;
+cursor:pointer;
 }
-
 
 .menu div{
 
-    background:#0066ff;
-    color:white;
-    padding:15px;
-    margin:10px 0;
-    border-radius:8px;
-    text-align:center;
+background:#0066ff;
+color:white;
+padding:15px;
+margin:10px 0;
+border-radius:8px;
+text-align:center;
 
 }
-
 
 #dashboard{
-
-    display:none;
-
+display:none;
 }
-
 
 .logout{
-
-    background:red;
-
+background:red;
 }
-
 
 </style>
 
@@ -90,10 +74,10 @@ button{
 <h2>🚚 LOGIN ADMIN</h2>
 
 
-<input id="username" placeholder="Username">
+<input id="user" placeholder="Username">
 
 
-<input id="password" type="password" placeholder="Password">
+<input id="pass" type="password" placeholder="Password">
 
 
 <button onclick="login()">
@@ -109,25 +93,25 @@ LOGIN
 
 
 
-
 <div class="box" id="dashboard">
 
 
-<h2>🚚 EKSPEDISI TRUK</h2>
+<h2>
+🚚 EKSPEDISI TRUK
+</h2>
 
 
 <p>
-Selamat datang:
+Admin:
 <b id="nama"></b>
 </p>
-
 
 
 <div class="menu">
 
 <div>👥 Pelanggan</div>
 
-<div>🚚 Armada Truk</div>
+<div>🚚 Armada</div>
 
 <div>👨‍✈️ Supir</div>
 
@@ -137,23 +121,15 @@ Selamat datang:
 
 <div>📊 Laporan</div>
 
-
 </div>
 
 
-<br>
-
-
 <button class="logout" onclick="logout()">
-
-LOGOUT
-
+Logout
 </button>
 
 
 </div>
-
-
 
 
 
@@ -162,17 +138,14 @@ LOGOUT
 
 function login(){
 
+let u =
+document.getElementById("user").value;
 
-let user =
-document.getElementById("username").value;
-
-
-let pass =
-document.getElementById("password").value;
+let p =
+document.getElementById("pass").value;
 
 
-
-if(user=="admin" && pass=="123456"){
+if(u=="admin" && p=="123456"){
 
 
 document.getElementById("login")
@@ -184,20 +157,17 @@ document.getElementById("dashboard")
 
 
 document.getElementById("nama")
-.innerHTML=user;
-
-
-
-}else{
-
-
-document.getElementById("pesan")
-.innerHTML="Login salah";
+.innerHTML=u;
 
 
 }
 
+else{
 
+document.getElementById("pesan")
+.innerHTML="Login salah";
+
+}
 
 }
 
@@ -205,21 +175,12 @@ document.getElementById("pesan")
 
 function logout(){
 
-
-document.getElementById("dashboard")
-.style.display="none";
-
-
-document.getElementById("login")
-.style.display="block";
-
+location.reload();
 
 }
 
 
-
 </script>
-
 
 
 </body>
