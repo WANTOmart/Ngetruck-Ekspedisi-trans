@@ -3,114 +3,244 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ekspedisi Truk</title>
+  <title>Ngetruck Ekspedisi Trans</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
+    *{
+      box-sizing:border-box;
+      font-family:Arial, sans-serif;
     }
 
-    body {
-      margin: 0;
-      background: #f1f3f6;
+    body{
+      margin:0;
+      background:#f1f4f9;
+      color:#1f2937;
     }
 
-    .login,
+    .login{
+      width:90%;
+      max-width:390px;
+      margin:70px auto;
+      background:white;
+      padding:28px;
+      border-radius:14px;
+      box-shadow:0 8px 25px rgba(0,0,0,.12);
+    }
+
     .dashboard,
-    .content {
-      width: 90%;
-      max-width: 1000px;
-      margin: 40px auto;
-      background: white;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #ccc;
+    .content{
+      width:94%;
+      max-width:1150px;
+      margin:25px auto;
+      background:white;
+      padding:25px;
+      border-radius:14px;
+      box-shadow:0 5px 20px rgba(0,0,0,.08);
     }
 
-    h2 {
-      text-align: center;
+    h1,h2,h3{
+      margin-top:0;
     }
 
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 7px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+    h2{
+      text-align:center;
     }
 
-    button {
-      padding: 12px;
-      background: #0066ff;
-      color: white;
-      border: 0;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 5px;
+    .subtitle{
+      text-align:center;
+      color:#6b7280;
+      margin-top:-8px;
+      margin-bottom:22px;
     }
 
-    button:hover {
-      opacity: 0.85;
+    input,select{
+      width:100%;
+      padding:12px;
+      margin:7px 0;
+      border:1px solid #cbd5e1;
+      border-radius:7px;
+      font-size:15px;
     }
 
-    .menu {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 20px;
+    button{
+      padding:11px 16px;
+      background:#0066ff;
+      color:white;
+      border:0;
+      border-radius:7px;
+      cursor:pointer;
+      font-size:15px;
+      margin-top:6px;
     }
 
-    .menu div {
-      background: #0066ff;
-      color: white;
-      padding: 22px;
-      text-align: center;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 17px;
+    button:hover{
+      opacity:.88;
     }
 
-    .menu div:hover {
-      background: #004fc4;
+    .btn-full{
+      width:100%;
     }
 
-    .logout {
-      background: #e53935;
-      width: 100%;
+    .logout{
+      background:#dc2626;
+      width:100%;
+      margin-top:22px;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:15px;
+      border-bottom:1px solid #e5e7eb;
+      padding-bottom:15px;
+      margin-bottom:20px;
     }
 
-    th, td {
-      border: 1px solid #ddd;
-      padding: 10px;
-      text-align: left;
+    .topbar h2{
+      text-align:left;
+      margin:0;
     }
 
-    th {
-      background: #0066ff;
-      color: white;
+    .admin{
+      background:#eaf2ff;
+      padding:10px 14px;
+      border-radius:8px;
+      white-space:nowrap;
     }
 
-    td button {
-      background: #e53935;
-      margin: 0;
-      padding: 8px 12px;
+    .statistik{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+      margin:20px 0;
     }
 
-    #dashboard,
-    #content {
-      display: none;
+    .card{
+      padding:18px;
+      border-radius:10px;
+      color:white;
+      text-align:center;
+      background:#0066ff;
     }
 
-    @media (max-width: 600px) {
-      .menu {
-        grid-template-columns: repeat(2, 1fr);
+    .card:nth-child(2){ background:#0f9d58; }
+    .card:nth-child(3){ background:#f59e0b; }
+    .card:nth-child(4){ background:#8b5cf6; }
+
+    .card b{
+      display:block;
+      font-size:28px;
+      margin-top:7px;
+    }
+
+    .menu{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-top:20px;
+    }
+
+    .menu div{
+      background:#fff;
+      border:1px solid #dbe3ef;
+      padding:22px 12px;
+      text-align:center;
+      border-radius:10px;
+      cursor:pointer;
+      font-size:16px;
+      font-weight:bold;
+      box-shadow:0 2px 6px rgba(0,0,0,.05);
+    }
+
+    .menu div:hover{
+      background:#0066ff;
+      color:white;
+      border-color:#0066ff;
+    }
+
+    .form-box{
+      background:#f8fafc;
+      padding:18px;
+      border-radius:10px;
+      margin-bottom:20px;
+      border:1px solid #e2e8f0;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:15px;
+      background:white;
+    }
+
+    th,td{
+      border:1px solid #dbe3ef;
+      padding:11px;
+      text-align:left;
+    }
+
+    th{
+      background:#0066ff;
+      color:white;
+    }
+
+    td button{
+      background:#dc2626;
+      margin:0;
+      padding:8px 11px;
+    }
+
+    .back{
+      background:#64748b;
+      margin-top:18px;
+    }
+
+    .info{
+      background:#eff6ff;
+      padding:14px;
+      border-radius:8px;
+      border-left:4px solid #0066ff;
+      margin:12px 0;
+    }
+
+    #dashboard,#content{
+      display:none;
+    }
+
+    #pesan{
+      text-align:center;
+      color:#dc2626;
+      font-weight:bold;
+    }
+
+    @media(max-width:750px){
+      .statistik{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .menu{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .topbar{
+        display:block;
+      }
+
+      .admin{
+        margin-top:12px;
+      }
+
+      .dashboard,.content{
+        padding:18px;
+      }
+
+      table{
+        font-size:13px;
+      }
+
+      th,td{
+        padding:8px;
       }
     }
   </style>
@@ -121,47 +251,83 @@
   <!-- LOGIN -->
   <div class="login" id="login">
     <h2>🚚 LOGIN ADMIN</h2>
+    <p class="subtitle">Ngetruck Ekspedisi Trans</p>
 
-    <input id="user" placeholder="Username">
-    <input id="pass" type="password" placeholder="Password">
+    <input id="user" placeholder="Username" autocomplete="username">
+    <input id="pass" type="password" placeholder="Password" autocomplete="current-password">
 
-    <button onclick="prosesLogin()">LOGIN</button>
+    <button class="btn-full" onclick="prosesLogin()">LOGIN</button>
 
     <p id="pesan"></p>
+
+    <div class="info">
+      Login demo:<br>
+      Username: <b>admin</b><br>
+      Password: <b>123456</b>
+    </div>
   </div>
 
   <!-- DASHBOARD -->
   <div class="dashboard" id="dashboard">
-    <h2>🚚 EKSPEDISI TRUK</h2>
+    <div class="topbar">
+      <div>
+        <h2>🚚 NGETRUCK EKSPEDISI TRANS</h2>
+        <p style="margin:6px 0 0;color:#64748b;">Dashboard Manajemen Pengiriman</p>
+      </div>
 
-    <p>
-      Selamat datang Admin:
-      <b id="nama"></b>
-    </p>
-
-    <div class="menu">
-      <div onclick="buka('pelanggan')">👥 Pelanggan</div>
-      <div onclick="buka('armada')">🚚 Armada Truk</div>
-      <div onclick="buka('supir')">👨‍✈️ Supir</div>
-      <div onclick="buka('pengiriman')">📦 Pengiriman</div>
-      <div onclick="buka('tracking')">📍 Tracking Resi</div>
-      <div onclick="buka('laporan')">📊 Laporan</div>
+      <div class="admin">
+        👤 Admin: <b id="nama"></b>
+      </div>
     </div>
 
-    <br>
+    <h3>Ringkasan Data</h3>
+
+    <div class="statistik">
+      <div class="card">
+        👥 Pelanggan
+        <b id="totalPelanggan">0</b>
+      </div>
+
+      <div class="card">
+        🚚 Armada
+        <b id="totalArmada">0</b>
+      </div>
+
+      <div class="card">
+        👨‍✈️ Supir
+        <b id="totalSupir">0</b>
+      </div>
+
+      <div class="card">
+        📦 Pengiriman
+        <b id="totalPengiriman">0</b>
+      </div>
+    </div>
+
+    <h3>Menu Utama</h3>
+
+    <div class="menu">
+      <div onclick="buka('pelanggan')">👥<br>Pelanggan</div>
+      <div onclick="buka('armada')">🚚<br>Armada Truk</div>
+      <div onclick="buka('supir')">👨‍✈️<br>Supir</div>
+      <div onclick="buka('pengiriman')">📦<br>Pengiriman</div>
+      <div onclick="buka('tracking')">📍<br>Tracking Resi</div>
+      <div onclick="buka('laporan')">📊<br>Laporan</div>
+    </div>
 
     <button class="logout" onclick="logout()">Logout</button>
   </div>
 
   <!-- HALAMAN DATA -->
   <div class="content" id="content">
-    <h2 id="judul"></h2>
+    <h2 id="judul">DATA</h2>
 
-    <div id="form"></div>
+    <div class="form-box" id="form"></div>
 
     <table id="tabelData">
       <thead>
         <tr>
+          <th>No</th>
           <th>Data</th>
           <th>Aksi</th>
         </tr>
@@ -169,29 +335,76 @@
       <tbody id="tabel"></tbody>
     </table>
 
-    <br>
-
-    <button onclick="kembali()">⬅ Kembali ke Dashboard</button>
+    <button class="back" onclick="kembali()">⬅ Kembali ke Dashboard</button>
   </div>
 
   <script>
     let jenis = "";
 
-    function prosesLogin() {
-      let username = document.getElementById("user").value;
+    /* DATA AWAL */
+    function buatDataAwal(){
+      if(!localStorage.getItem("pelanggan")){
+        localStorage.setItem("pelanggan", JSON.stringify([
+          "PT Maju Lancar | 081234567890 | Surabaya",
+          "CV Berkah Jaya | 082233445566 | Sidoarjo",
+          "Toko Makmur Abadi | 085712345678 | Malang"
+        ]));
+      }
+
+      if(!localStorage.getItem("armada")){
+        localStorage.setItem("armada", JSON.stringify([
+          "N 1234 AB | Truk Box | Siap Jalan",
+          "L 5678 CD | Truk Engkel | Dalam Perjalanan",
+          "W 9012 EF | Truk Fuso | Perawatan"
+        ]));
+      }
+
+      if(!localStorage.getItem("supir")){
+        localStorage.setItem("supir", JSON.stringify([
+          "Budi Santoso | 081111111111",
+          "Andi Wijaya | 082222222222",
+          "Joko Prasetyo | 083333333333"
+        ]));
+      }
+
+      if(!localStorage.getItem("pengiriman")){
+        localStorage.setItem("pengiriman", JSON.stringify([
+          "NGT-001 | Surabaya - Jakarta | Dalam Perjalanan",
+          "NGT-002 | Malang - Bandung | Barang Diterima",
+          "NGT-003 | Sidoarjo - Semarang | Menunggu Pickup"
+        ]));
+      }
+    }
+
+    buatDataAwal();
+
+    function data(namaData){
+      return JSON.parse(localStorage.getItem(namaData)) || [];
+    }
+
+    function updateDashboard(){
+      document.getElementById("totalPelanggan").innerHTML = data("pelanggan").length;
+      document.getElementById("totalArmada").innerHTML = data("armada").length;
+      document.getElementById("totalSupir").innerHTML = data("supir").length;
+      document.getElementById("totalPengiriman").innerHTML = data("pengiriman").length;
+    }
+
+    function prosesLogin(){
+      let username = document.getElementById("user").value.trim();
       let password = document.getElementById("pass").value;
 
-      if (username === "admin" && password === "123456") {
+      if(username === "admin" && password === "123456"){
         document.getElementById("login").style.display = "none";
         document.getElementById("dashboard").style.display = "block";
         document.getElementById("nama").innerHTML = username;
         document.getElementById("pesan").innerHTML = "";
-      } else {
+        updateDashboard();
+      }else{
         document.getElementById("pesan").innerHTML = "❌ Username atau password salah";
       }
     }
 
-    function buka(menu) {
+    function buka(menu){
       jenis = menu;
 
       document.getElementById("dashboard").style.display = "none";
@@ -200,8 +413,9 @@
 
       let h = "";
 
-      if (menu === "pelanggan") {
+      if(menu === "pelanggan"){
         h = `
+          <h3>Tambah Pelanggan</h3>
           <input id="a" placeholder="Nama Pelanggan">
           <input id="b" placeholder="No HP">
           <input id="c" placeholder="Alamat">
@@ -209,8 +423,9 @@
         `;
       }
 
-      if (menu === "armada") {
+      if(menu === "armada"){
         h = `
+          <h3>Tambah Armada Truk</h3>
           <input id="a" placeholder="Nomor Polisi">
           <input id="b" placeholder="Jenis Truk">
           <input id="c" placeholder="Status Armada">
@@ -218,16 +433,18 @@
         `;
       }
 
-      if (menu === "supir") {
+      if(menu === "supir"){
         h = `
+          <h3>Tambah Supir</h3>
           <input id="a" placeholder="Nama Supir">
           <input id="b" placeholder="No HP">
           <button onclick="simpan()">Simpan Supir</button>
         `;
       }
 
-      if (menu === "pengiriman") {
+      if(menu === "pengiriman"){
         h = `
+          <h3>Tambah Pengiriman</h3>
           <input id="a" placeholder="Nomor Resi">
           <input id="b" placeholder="Tujuan Pengiriman">
           <input id="c" placeholder="Status Pengiriman">
@@ -235,15 +452,16 @@
         `;
       }
 
-      if (menu === "tracking") {
+      if(menu === "tracking"){
         h = `
-          <input id="a" placeholder="Masukkan Nomor Resi">
+          <h3>📍 Tracking Resi</h3>
+          <input id="a" placeholder="Masukkan Nomor Resi, contoh: NGT-001">
           <button onclick="tracking()">Cari Resi</button>
-          <p id="hasil"></p>
+          <div class="info" id="hasil">Masukkan nomor resi untuk melihat status pengiriman.</div>
         `;
       }
 
-      if (menu === "laporan") {
+      if(menu === "laporan"){
         let pelanggan = data("pelanggan");
         let armada = data("armada");
         let supir = data("supir");
@@ -251,40 +469,42 @@
 
         h = `
           <h3>📊 LAPORAN DATA EKSPEDISI</h3>
-          <p>Total Pelanggan: <b>${pelanggan.length}</b></p>
-          <p>Total Armada: <b>${armada.length}</b></p>
-          <p>Total Supir: <b>${supir.length}</b></p>
-          <p>Total Pengiriman: <b>${pengiriman.length}</b></p>
+          <div class="info">
+            <p>Total Pelanggan: <b>${pelanggan.length}</b></p>
+            <p>Total Armada: <b>${armada.length}</b></p>
+            <p>Total Supir: <b>${supir.length}</b></p>
+            <p>Total Pengiriman: <b>${pengiriman.length}</b></p>
+          </div>
         `;
       }
 
       document.getElementById("form").innerHTML = h;
 
-      if (menu === "tracking" || menu === "laporan") {
+      if(menu === "tracking" || menu === "laporan"){
         document.getElementById("tabelData").style.display = "none";
-      } else {
+      }else{
         document.getElementById("tabelData").style.display = "table";
         tampil();
       }
     }
 
-    function simpan() {
+    function simpan(){
       let inputA = document.getElementById("a").value.trim();
       let inputB = document.getElementById("b");
       let inputC = document.getElementById("c");
 
-      if (inputA === "") {
+      if(inputA === ""){
         alert("Data utama masih kosong");
         return;
       }
 
       let isi = inputA;
 
-      if (inputB && inputB.value.trim() !== "") {
+      if(inputB && inputB.value.trim() !== ""){
         isi += " | " + inputB.value.trim();
       }
 
-      if (inputC && inputC.value.trim() !== "") {
+      if(inputC && inputC.value.trim() !== ""){
         isi += " | " + inputC.value.trim();
       }
 
@@ -294,69 +514,92 @@
       localStorage.setItem(jenis, JSON.stringify(arr));
 
       tampil();
-      alert("✅ Data berhasil disimpan");
+      updateDashboard();
 
       document.getElementById("a").value = "";
-      if (inputB) inputB.value = "";
-      if (inputC) inputC.value = "";
+      if(inputB) inputB.value = "";
+      if(inputC) inputC.value = "";
+
+      alert("✅ Data berhasil disimpan");
     }
 
-    function data(namaData) {
-      return JSON.parse(localStorage.getItem(namaData)) || [];
-    }
-
-    function tampil() {
+    function tampil(){
       let tabel = document.getElementById("tabel");
       tabel.innerHTML = "";
 
-      data(jenis).forEach((x, i) => {
+      let arr = data(jenis);
+
+      if(arr.length === 0){
+        tabel.innerHTML = `
+          <tr>
+            <td colspan="3" style="text-align:center;">Belum ada data</td>
+          </tr>
+        `;
+        return;
+      }
+
+      arr.forEach((x,i) => {
         tabel.innerHTML += `
           <tr>
+            <td>${i + 1}</td>
             <td>${x}</td>
-            <td>
-              <button onclick="hapus(${i})">Hapus</button>
-            </td>
+            <td><button onclick="hapus(${i})">Hapus</button></td>
           </tr>
         `;
       });
     }
 
-    function hapus(i) {
-      if (!confirm("Hapus data ini?")) return;
+    function hapus(i){
+      if(!confirm("Hapus data ini?")) return;
 
       let arr = data(jenis);
-      arr.splice(i, 1);
+      arr.splice(i,1);
 
       localStorage.setItem(jenis, JSON.stringify(arr));
+
       tampil();
+      updateDashboard();
     }
 
-    function tracking() {
+    function tracking(){
       let cari = document.getElementById("a").value.trim();
       let hasil = "❌ Resi tidak ditemukan";
 
+      if(cari === ""){
+        document.getElementById("hasil").innerHTML = "⚠ Masukkan nomor resi terlebih dahulu.";
+        return;
+      }
+
       data("pengiriman").forEach(x => {
-        if (x.toLowerCase().includes(cari.toLowerCase())) {
-          hasil = "📦 Data pengiriman ditemukan:<br><b>" + x + "</b>";
+        if(x.toLowerCase().includes(cari.toLowerCase())){
+          hasil = "📦 Data pengiriman ditemukan:<br><br><b>" + x + "</b>";
         }
       });
 
       document.getElementById("hasil").innerHTML = hasil;
     }
 
-    function kembali() {
+    function kembali(){
       document.getElementById("content").style.display = "none";
       document.getElementById("dashboard").style.display = "block";
+      updateDashboard();
     }
 
-    function logout() {
+    function logout(){
       document.getElementById("dashboard").style.display = "none";
       document.getElementById("content").style.display = "none";
       document.getElementById("login").style.display = "block";
 
       document.getElementById("user").value = "";
       document.getElementById("pass").value = "";
+      document.getElementById("pesan").innerHTML = "";
     }
+
+    document.getElementById("pass").addEventListener("keydown", function(e){
+      if(e.key === "Enter"){
+        prosesLogin();
+      }
+    });
   </script>
 
 </body>
