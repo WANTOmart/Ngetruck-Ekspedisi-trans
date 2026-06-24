@@ -2,32 +2,12 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard Ekspedisi</title>
+<title>Dashboard</title>
 
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Segoe UI,sans-serif;
-}
-
 body{
+    font-family:Arial;
     background:#f4f6f9;
-}
-
-.header{
-    background:#0d6efd;
-    color:white;
-    padding:15px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.container{
     padding:20px;
 }
 
@@ -35,117 +15,60 @@ body{
     background:white;
     padding:20px;
     border-radius:10px;
-    margin-bottom:15px;
-    box-shadow:0 2px 8px rgba(0,0,0,.1);
 }
 
-.logout{
+button{
+    padding:10px;
     background:red;
     color:white;
     border:none;
-    padding:10px 15px;
-    border-radius:6px;
-    cursor:pointer;
 }
-
-.menu{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:15px;
-    margin-top:20px;
-}
-
-.menu a{
-    text-decoration:none;
-    background:white;
-    padding:20px;
-    text-align:center;
-    border-radius:10px;
-    color:black;
-    box-shadow:0 2px 8px rgba(0,0,0,.1);
-}
-
 </style>
 
 </head>
 <body>
 
 <script>
-
-if(localStorage.getItem("login") !== "true"){
-    window.location.href = "login.html";
+if(localStorage.getItem("login")!=="true"){
+    location.href="login.html";
 }
-
 </script>
 
-<div class="header">
+<div class="card">
 
-<h2>
-🚚 Dashboard Ekspedisi
-</h2>
+<h2>Dashboard Ekspedisi Truk</h2>
 
-<button
-class="logout"
-onclick="logout()">
+<p>
+User :
+<b id="user"></b>
+</p>
+
+<p>
+Role :
+<b id="role"></b>
+</p>
+
+<br>
+
+<button onclick="logout()">
 Logout
 </button>
 
 </div>
 
-<div class="container">
-
-<div class="card">
-
-<h3>
-Selamat Datang,
-<span id="admin"></span>
-</h3>
-
-</div>
-
-<div class="menu">
-
-<a href="pages/pelanggan.html">
-👥 Pelanggan
-</a>
-
-<a href="pages/armada.html">
-🚚 Armada
-</a>
-
-<a href="pages/supir.html">
-👨‍✈️ Supir
-</a>
-
-<a href="pages/pengiriman.html">
-📦 Pengiriman
-</a>
-
-<a href="pages/tracking.html">
-📍 Tracking
-</a>
-
-<a href="pages/laporan.html">
-📊 Laporan
-</a>
-
-</div>
-
-</div>
-
 <script>
 
-document.getElementById("admin")
-.innerHTML =
+document.getElementById("user").innerHTML =
 localStorage.getItem("adminName");
+
+document.getElementById("role").innerHTML =
+localStorage.getItem("role");
 
 function logout(){
 
-    localStorage.removeItem("login");
-    localStorage.removeItem("adminName");
+    localStorage.clear();
 
-    window.location.href =
-    "login.html";
+    location.href="login.html";
 
 }
 
