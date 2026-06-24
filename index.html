@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ekspedisi Truk</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f2f4f8;
+}
+
+
+.box{
+    width:350px;
+    margin:80px auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 0 10px #ccc;
+}
+
+
+h2{
+    text-align:center;
+}
+
+
+input{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+}
+
+
+button{
+
+    width:100%;
+    padding:12px;
+    background:#0066ff;
+    color:white;
+    border:0;
+    border-radius:5px;
+
+}
+
+
+.menu div{
+
+    background:#0066ff;
+    color:white;
+    padding:15px;
+    margin:10px 0;
+    border-radius:8px;
+    text-align:center;
+
+}
+
+
+#dashboard{
+
+    display:none;
+
+}
+
+
+.logout{
+
+    background:red;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="box" id="login">
+
+
+<h2>🚚 LOGIN ADMIN</h2>
+
+
+<input id="username" placeholder="Username">
+
+
+<input id="password" type="password" placeholder="Password">
+
+
+<button onclick="login()">
+LOGIN
+</button>
+
+
+<p id="pesan"></p>
+
+
+</div>
+
+
+
+
+
+<div class="box" id="dashboard">
+
+
+<h2>🚚 EKSPEDISI TRUK</h2>
+
+
+<p>
+Selamat datang:
+<b id="nama"></b>
+</p>
+
+
+
+<div class="menu">
+
+<div>👥 Pelanggan</div>
+
+<div>🚚 Armada Truk</div>
+
+<div>👨‍✈️ Supir</div>
+
+<div>📦 Pengiriman</div>
+
+<div>📍 Tracking Resi</div>
+
+<div>📊 Laporan</div>
+
+
+</div>
+
+
+<br>
+
+
+<button class="logout" onclick="logout()">
+
+LOGOUT
+
+</button>
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+function login(){
+
+
+let user =
+document.getElementById("username").value;
+
+
+let pass =
+document.getElementById("password").value;
+
+
+
+if(user=="admin" && pass=="123456"){
+
+
+document.getElementById("login")
+.style.display="none";
+
+
+document.getElementById("dashboard")
+.style.display="block";
+
+
+document.getElementById("nama")
+.innerHTML=user;
+
+
+
+}else{
+
+
+document.getElementById("pesan")
+.innerHTML="Login salah";
+
+
+}
+
+
+
+}
+
+
+
+function logout(){
+
+
+document.getElementById("dashboard")
+.style.display="none";
+
+
+document.getElementById("login")
+.style.display="block";
+
+
+}
+
+
+
+</script>
+
+
+
+</body>
+</html>
