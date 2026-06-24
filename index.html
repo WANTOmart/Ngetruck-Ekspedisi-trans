@@ -420,23 +420,33 @@
       }
 
       if(menu === "armada"){
-        h = `
-          <h3>Tambah Armada Truk</h3>
-          <input id="a" placeholder="Nomor Polisi">
-          <input id="b" placeholder="Jenis Truk">
-          <input id="c" placeholder="Status Armada">
-          <button onclick="simpan()">Simpan Armada</button>
-        `;
-      }
+  h = `
+    <h3>Tambah Armada Truk</h3>
 
-      if(menu === "supir"){
-        h = `
-          <h3>Tambah Supir</h3>
-          <input id="a" placeholder="Nama Supir">
-          <input id="b" placeholder="No HP">
-          <button onclick="simpan()">Simpan Supir</button>
-        `;
-      }
+    <input id="a" placeholder="Nomor Polisi">
+    <input id="b" placeholder="Jenis Truk">
+    <input id="c" placeholder="Status Armada">
+
+    <label><b>Foto Truk</b></label>
+    <input id="foto" type="file" accept="image/*">
+
+    <button onclick="simpan()">Simpan Armada</button>
+  `;
+}
+
+    if(menu === "supir"){
+  h = `
+    <h3>Tambah Supir</h3>
+
+    <input id="a" placeholder="Nama Supir">
+    <input id="b" placeholder="No HP">
+
+    <label><b>Foto Supir</b></label>
+    <input id="foto" type="file" accept="image/*">
+
+    <button onclick="simpan()">Simpan Supir</button>
+  `;
+}
 
       if(menu === "pengiriman"){
         h = `
