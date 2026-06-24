@@ -3,8 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login Admin</title>
-<link rel="stylesheet" href="css/style.css">
+<title>Login Admin - Ekspedisi Truk</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.login-box{
+    width:350px;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+
+.login-box h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#0d6efd;
+}
+
+.login-box input{
+    width:100%;
+    padding:12px;
+    margin-bottom:12px;
+    border:1px solid #ddd;
+    border-radius:6px;
+}
+
+.login-box button{
+    width:100%;
+    padding:12px;
+    background:#0d6efd;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.login-box button:hover{
+    background:#0b5ed7;
+}
+
+#pesan{
+    margin-top:10px;
+    color:red;
+    text-align:center;
+}
+</style>
+
 </head>
 <body>
 
@@ -12,17 +71,68 @@
 
 <h2>🚚 LOGIN ADMIN</h2>
 
-<input type="text" id="username" placeholder="Username">
+<input
+type="text"
+id="username"
+placeholder="Username">
 
-<input type="password" id="password" placeholder="Password">
+<input
+type="password"
+id="password"
+placeholder="Password">
 
-<button onclick="login()">LOGIN</button>
+<button onclick="login()">
+LOGIN
+</button>
 
 <p id="pesan"></p>
 
 </div>
 
-<script src="js/login.js"></script>
+<script>
+
+if(localStorage.getItem("login") === "true"){
+    window.location.href = "dashboard.html";
+}
+
+function login(){
+
+    let username =
+    document.getElementById("username").value;
+
+    let password =
+    document.getElementById("password").value;
+
+    if(
+        username === "admin" &&
+        password === "123456"
+    ){
+
+        localStorage.setItem(
+            "login",
+            "true"
+        );
+
+        localStorage.setItem(
+            "adminName",
+            username
+        );
+
+        window.location.href =
+        "dashboard.html";
+
+    }else{
+
+        document.getElementById(
+            "pesan"
+        ).innerHTML =
+        "Username atau Password salah";
+
+    }
+
+}
+
+</script>
 
 </body>
 </html>
